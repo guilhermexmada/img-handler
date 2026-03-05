@@ -13,6 +13,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/', healthRoutes)
-app.use(errorMiddleware) // sempre o último app.use() pois é a última camada p/ interceptar erros
+app.use(errorMiddleware)
 
 export default app

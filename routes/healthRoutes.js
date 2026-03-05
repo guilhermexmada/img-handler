@@ -3,6 +3,6 @@ import healthController from "../controllers/healthController.js";
 
 const healthRoutes = express.Router()
 
-healthRoutes.get('/health', healthController.healthCheck) // rota de teste
+healthRoutes.get('/health', healthController.healthCheck)
 
 export default healthRoutes
