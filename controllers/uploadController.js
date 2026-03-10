@@ -4,16 +4,14 @@ import uploadService from '../services/uploadService.js'
 class UploadController{
     async uploadImage(req, res, next){
         try{
-            const result = await uploadService.processUpload(req.file) // chama o serviço de upload com arquivo no parâmetro
+            const result = await uploadService.processUpload(req.file)
 
-            // extrai e valida o tipo MIME
             const filePath = req.file.path
             await validateImage(filePath)
 
-            res.status(200).json(result) // exibe dados do arquivo
-            // console.log([req.file,result])
+            res.status(200).json(result)
         } catch (error){
-            next(error) // trata erro com errorMiddleware
+            next(error)
         }
     }
 }

@@ -1,26 +1,22 @@
-import multer from 'multer' // middleware de upload que processa req do tipo form-data
-import path from 'path' // módulo nativo do node p/ manipular caminhos e extensões de arquivos
-import { v4 as uuidv4 } from 'uuid' // lib p/ identificador único
+import multer from 'multer' 
+import path from 'path' 
+import { v4 as uuidv4 } from 'uuid' 
 
-const storage = multer.diskStorage({ // salva arquivo no servidor (pasta uploads)
+const storage = multer.diskStorage({ 
     
-    // salva arquivo
     destination: (req, file, cb) => {
-        cb(null, 'uploads/') // callback (nenhum erro, pasta de destino)
+        cb(null, 'uploads/') 
     },
 
-    // nomeia arquivo
     filename: (req, file, cb) => {
         
         const uniqueName = uuidv4()
-        const extension = path.extname(file.originalname) // extrai a extensão do arquivo
+        const extension = path.extname(file.originalname) 
 
-        // retorna nome único
         cb(null, uniqueName + extension)
     }
 })
 
-// tipos permitidos
 const allowedMimeTypes = [
     'image/jpeg',
     'image/png',
@@ -28,17 +24,17 @@ const allowedMimeTypes = [
 ]
 
 const fileFilter = (req, file, cb) => {
-    if(allowedMimeTypes.includes(file.mimetype)){ // se algum dos tipos permitidos é o tipo do arquivo
+    if(allowedMimeTypes.includes(file.mimetype)){ 
         cb(null, true)
     } else {
         cb(new Error('Tipo de arquivo não permitido'), false)
     }
 }
 
-const upload = multer({ // cria middleware configurado
+const upload = multer({ 
     storage,
     fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // máx de 500mb
+    limits: { fileSize: 5 * 1024 * 1024 } 
 })
 
-export default upload // exporta para usar nas rotas
+export default upload 

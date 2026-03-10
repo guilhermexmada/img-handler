@@ -1,9 +1,9 @@
 import rateLimit from "express-rate-limit"
 
-const uploadLimiter = rateLimit({ // limita quant. de uploads num período por IP
+const uploadLimiter = rateLimit({ 
 
-    windowMs : 16 * 60 * 1000, // dentro de 15 minutos
-    max : 20, // máximo de 20 uploads
+    windowMs : 16 * 60 * 1000, 
+    max : 20, 
 
     message: {
         success: false,

@@ -5,7 +5,6 @@ import uploadLimiter from '../middlewares/uploadRateLimiter.js'
 
 const router = express.Router()
 
-// campo do formulário deve ser 'image'
 router.post('/', uploadLimiter, upload.single('image'), uploadController.uploadImage)
 
 export default router
