@@ -1,5 +1,6 @@
 import express from 'express'
 import healthRoutes from './routes/healthRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 import errorMiddleware from './middlewares/errorMiddleware.js'
 
 const app = express()
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/', healthRoutes)
+app.use('/upload', uploadRoutes)
 app.use(errorMiddleware)
 
 export default app
