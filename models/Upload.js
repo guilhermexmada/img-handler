@@ -1,19 +1,18 @@
 import sequelize from '../config/database.js'
-import { DataTypes } from 'sequelize' // padrão moderno p/ tipagem dos dados
+import { DataTypes } from 'sequelize' 
 
-// criando molde da tabela
 const Image = sequelize.define('Image', {
-    id: { // uploadId em formato UUID é melhor para segurança do código
+    id: { 
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
-    file_path: { // caminho do arquivo deve ser único
+    file_path: { 
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    mime_type: { // + 1 verificação do mime type
+    mime_type: { 
         type: DataTypes.ENUM(
             'image/jpeg',
             'image/jpg',
@@ -21,7 +20,7 @@ const Image = sequelize.define('Image', {
         ),
         allowNull: false,
     },
-    size: { // validate evita baixar imagens com tamanho 0
+    size: { 
         type: DataTypes.INTEGER,
         allowNull: false,
         validate:{

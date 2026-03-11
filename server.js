@@ -6,16 +6,12 @@ import { initStorage } from './storage.js'
 
 const PORT = process.env.PORT || 8080
 
-// bootstrap = processo que inicializa aplicação
 async function startServer() { 
   try {
-    // inicializa banco
     await initDatabase()
 
-    // inicializa pasta uploads
     await initStorage()
 
-    // inicializa servidor
     const server = app.listen(PORT, () => {
       console.log(`Servidor rodando em http://localhost:${PORT}`)
     })
@@ -38,7 +34,7 @@ async function startServer() {
     process.on('SIGTERM', async () => {
       console.log('🛑 Encerrando servidor...');
 
-      await sequelize.close() // fecha conexão com banco
+      await sequelize.close() 
 
       server.close(() => {
         console.log('✅ Servidor encerrado corretamente');
@@ -51,6 +47,5 @@ async function startServer() {
   }
 }
 
-// executando inicialização
 startServer()
 

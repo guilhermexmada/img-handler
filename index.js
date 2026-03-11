@@ -4,7 +4,7 @@ import uploadRoutes from './routes/uploadRoutes.js'
 import errorMiddleware from './middlewares/errorMiddleware.js'
 import dotenv from 'dotenv'
 
-dotenv.config() // carrega variáveis de ambiente definidas no arquivo .env
+dotenv.config()
 
 const app = express()
 app.set('view engine', 'ejs')

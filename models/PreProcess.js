@@ -1,7 +1,6 @@
 import sequelize from "../config/database.js"
 import { DataTypes } from "sequelize"
 
-// cria molde básico para tabela PreProcess, evitando quebrar relacionamento das models
 const PreProcess = sequelize.define("PreProcess", {
 
   id: {
@@ -10,7 +9,7 @@ const PreProcess = sequelize.define("PreProcess", {
     defaultValue: DataTypes.UUIDV4
   },
   
-  uploadId: { // campo para chave estrangeira (definida na model index)
+  uploadId: { 
     type: DataTypes.UUID,
     allowNull: false
   },
@@ -21,7 +20,7 @@ const PreProcess = sequelize.define("PreProcess", {
     unique: true
   },
 
-  operations:{ // registra todas as operações feitas com sharp
+  operations:{ 
     type: DataTypes.JSON
   }
 
