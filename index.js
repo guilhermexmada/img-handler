@@ -2,6 +2,9 @@ import express from 'express'
 import healthRoutes from './routes/healthRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import errorMiddleware from './middlewares/errorMiddleware.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
 app.set('view engine', 'ejs')
