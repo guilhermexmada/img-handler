@@ -1,4 +1,7 @@
 import { Sequelize } from 'sequelize'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 if(!process.env.DB_HOST || !process.env.DB_NAME){
     throw new Error('Variáveis de ambiente do banco de dados não foram definidas.')

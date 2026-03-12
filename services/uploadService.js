@@ -1,16 +1,19 @@
+import {Upload} from '../models/index.js'
+
 class UploadService{
     
-    async processUpload(file){
+    async processUpload(data){ 
         
-        if(!file){
+        if(!data){
             throw new Error('Arquivo não enviado') 
         }
+
+        const new_image = await Upload.create(data)
         
         return{
+            success: true,
             message: 'Upload realizado com sucesso',
-            filename: file.filename,
-            size: file.size,
-            path: file.path
+            new_image
         }
     }
 }
