@@ -17,10 +17,9 @@ async function initStorage() {
     }
 }
 
-// verifica se um arquivo existe na storage (pasta uploads/) recebendo caminho do arquivo direto do banco
 async function fileExists(path) {
     try {
-        await fs.promises.access(path) // fixed : para usar métodos de promise do 'fs' precisa puxar de 'fs.promises'
+        await fs.promises.access(path)
         return true
     } catch {
         return false

@@ -22,17 +22,15 @@ class UploadService {
     async getAll() {
         try {
             const saved_images = await Upload.findAll({
-                order: [['createdAt', 'DESC']] // ordena decrescente pela data de gravação
+                order: [['createdAt', 'DESC']]
             })
 
-            // para cada imagem encontrada, executa uma verificação da integridade no storage
             const result = await Promise.all(
-                // espera promisse para cada elemento
-                saved_images.map(async (image) => { // usa map() ao invés de forEach() pq foreach não espera promisess
 
-                    const exists = await fileExists(image.file_path) // chama função de verificação em storage.js (espera booleano)
+                saved_images.map(async (image) => { 
 
-                    // para cada, retorna os dados salvos no banco + se está na storage ou não
+                    const exists = await fileExists(image.file_path) 
+                    
                     return {
                         image,
                         exists_in_storage: exists,
