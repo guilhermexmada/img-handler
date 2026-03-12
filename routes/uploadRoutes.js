@@ -7,4 +7,6 @@ const router = express.Router()
 
 router.post('/', uploadLimiter, upload.single('image'), uploadController.uploadImage)
 
+router.get('/', uploadController.getAllImages)
+
 export default router

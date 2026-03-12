@@ -24,6 +24,14 @@ class UploadController{
             next(error)
         }
     }
+    async getAllImages(req, res, next){
+        try {
+            const result = await uploadService.getAll()
+            res.status(200).json(result)
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new UploadController
