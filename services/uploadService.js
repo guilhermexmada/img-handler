@@ -2,13 +2,12 @@ import {Upload} from '../models/index.js'
 
 class UploadService{
     
-    async processUpload(data){ // aguarda resultado do multer middleware
+    async processUpload(data){ 
         
         if(!data){
             throw new Error('Arquivo não enviado') 
         }
 
-        // salva imagem no banco (já foi baixada pelo multer)
         const new_image = await Upload.create(data)
         
         return{
