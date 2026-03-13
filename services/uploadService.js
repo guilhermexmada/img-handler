@@ -1,5 +1,5 @@
 import { Upload } from '../models/index.js'
-import { fileExists } from '../storage.js'
+import { fileExists } from '../utils/storage.js'
 import path from 'path'
 
 class UploadService {
