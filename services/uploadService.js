@@ -27,10 +27,10 @@ class UploadService {
 
             const result = await Promise.all(
 
-                saved_images.map(async (image) => { 
+                saved_images.map(async (image) => {
 
-                    const exists = await fileExists(image.file_path) 
-                    
+                    const exists = await fileExists(image.file_path)
+
                     return {
                         image,
                         exists_in_storage: exists,
@@ -41,6 +41,35 @@ class UploadService {
             return {
                 success: true,
                 message: 'Imagens encontradas com sucesso',
+                result
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getOne(id) {
+        try {
+            const saved_image = await Upload.findByPk(id)
+
+            if(!saved_image){ 
+                throw new Error('Imagem não encontrada.')
+            }
+
+            const verify = async () => { 
+                const exists = await fileExists(saved_image.file_path)
+                return {
+                    saved_image,
+                    exists_in_storage : exists
+                }
+            }
+
+            const result = await verify() 
+
+            return {
+                sucess: true,
+                message: 'Imagem encontrada com sucesso',
                 result
             }
 

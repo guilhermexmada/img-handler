@@ -1,6 +1,7 @@
 import { validateImage } from '../services/fileValidationService.js'
 import uploadService from '../services/uploadService.js'
 import path from 'path'
+import validator from 'validator'
 
 class UploadController{
     async uploadImage(req, res, next){
@@ -28,6 +29,21 @@ class UploadController{
         try {
             const result = await uploadService.getAll()
             res.status(200).json(result)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async getOneImage(req, res, next){
+        try {
+            const id = req.params.id
+
+            if(validator.isUUID(id)){
+                const result = await uploadService.getOne(id)
+                res.status(200).json(result)
+            } else{
+                res.status(400).json({error: 'Ocorreu um erro na validação da ID'})
+            }
+
         } catch (error) {
             next(error)
         }
