@@ -37,7 +37,6 @@ class UploadController{
         try {
             const id = req.params.id
 
-            // valida se o id está no formato uuid
             if(validator.isUUID(id)){
                 const result = await uploadService.getOne(id)
                 res.status(200).json(result)

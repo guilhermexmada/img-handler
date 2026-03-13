@@ -51,13 +51,13 @@ class UploadService {
 
     async getOne(id) {
         try {
-            const saved_image = await Upload.findByPk(id) // procura imagem pelo id
+            const saved_image = await Upload.findByPk(id)
 
-            if(!saved_image){ // valida se foi encontrada
+            if(!saved_image){ 
                 throw new Error('Imagem não encontrada.')
             }
 
-            const verify = async () => { // verifica integridade
+            const verify = async () => { 
                 const exists = await fileExists(saved_image.file_path)
                 return {
                     saved_image,
@@ -65,7 +65,7 @@ class UploadService {
                 }
             }
 
-            const result = await verify() // executa arrow function assíncrona (se não, retorna uma função ao invés de objeto)
+            const result = await verify() 
 
             return {
                 sucess: true,
