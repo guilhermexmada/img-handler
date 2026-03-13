@@ -9,4 +9,6 @@ router.post('/', uploadLimiter, upload.single('image'), uploadController.uploadI
 
 router.get('/', uploadController.getAllImages)
 
+router.get('/:id', uploadController.getOneImage) // rota para buscar 01 imagem por ID
+
 export default router
