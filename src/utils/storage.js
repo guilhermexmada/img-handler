@@ -1,16 +1,14 @@
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url' // pacote nativo para manipular URLs (diferente de path, usado para caminhos do sistema)
+import { fileURLToPath } from 'url' 
 
 async function initStorage() {
-    // obtém o caminho do arquivo atual (storage.js)
-    const __filepath = fileURLToPath(import.meta.url) // import.meta.url localiza storage.js por URL
 
-    // obtém o caminho do diretório pai
+    const __filepath = fileURLToPath(import.meta.url) 
+
     const __dirpath = path.dirname(__filepath)
     
-    // define o caminho absoluto para 'storage/uploads' na raiz do repositório
-    const uploadDir = path.resolve(__dirpath, '..', '..', 'storage', 'uploads') // separar diretórios como argumentos automatiza formatação do caminho de acordo com o SO (uso de \ ou /)
+    const uploadDir = path.resolve(__dirpath, '..', '..', 'storage', 'uploads') 
     try {
         if (!fs.existsSync(uploadDir)) {
             await fs.promises.mkdir(uploadDir,
