@@ -1,4 +1,4 @@
-import app from './index.js'
+import app from './app.js'
 import sequelize from './config/database.js'
 import { initDatabase } from './database/init.js'
 import { initStorage } from './utils/storage.js'
