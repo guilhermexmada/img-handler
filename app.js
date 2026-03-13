@@ -1,7 +1,7 @@
 import express from 'express'
-import healthRoutes from './routes/healthRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
-import errorMiddleware from './middlewares/errorMiddleware.js'
+import healthRoutes from './src/routes/healthRoutes.js'
+import uploadRoutes from './src/routes/uploadRoutes.js'
+import errorMiddleware from './src/middlewares/errorMiddleware.js'
 import dotenv from 'dotenv'
 
 dotenv.config()

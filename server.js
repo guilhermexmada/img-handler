@@ -1,7 +1,7 @@
 import app from './app.js'
-import sequelize from './config/database.js'
-import { initDatabase } from './database/init.js'
-import { initStorage } from './utils/storage.js'
+import sequelize from './src/config/database.js'
+import { initDatabase } from './src/database/init.js'
+import { initStorage } from './src/utils/storage.js'
 
 
 const PORT = process.env.PORT || 8080
