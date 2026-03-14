@@ -8,6 +8,7 @@ import sharp from 'sharp'
 export async function sharPipeline(inputPath, outputPath, operations = {}) {
     // cria pipeline lazy (operações são executadas apenas quando uma função de saída é chamada)
     let pipeline = sharp(inputPath)
+    let format
 
     if (operations.resize) { // se existe a operação X no objeto operations passado como parâmetro
         const width = operations.resize.width
@@ -26,14 +27,14 @@ export async function sharPipeline(inputPath, outputPath, operations = {}) {
     }
 
     if (operations.format) {
-        const format = operations.format
+        format = operations.format
         pipeline = pipeline.toFormat(format) // fix : format() para toFormat()
     } else {
-        const format = 'png'
+         format = 'png'
     }
 
     if (operations.compress) {
-        const quality = operations.compress
+        const quality = operations.compress.quality // fix : acessando valor de quality (compressão exige valor inteiro e não objeto) 
         if (format === 'jpeg') {
             pipeline = pipeline.jpeg({ quality })
         }
