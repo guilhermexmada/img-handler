@@ -27,7 +27,7 @@ export async function sharPipeline(inputPath, outputPath, operations = {}) {
 
     if (operations.format) {
         const format = operations.format
-        pipeline = pipeline.format(format)
+        pipeline = pipeline.toFormat(format) // fix : format() para toFormat()
     } else {
         const format = 'png'
     }
