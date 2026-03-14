@@ -22,7 +22,7 @@ export async function sharPipeline(inputPath, outputPath, operations = {}) {
 
     if (operations.crop) {
         const dimensions = operations.crop
-        pipeline = pipeline.crop(dimensions)
+        pipeline = pipeline.extract(dimensions) // fix : crop() para extract()
     }
 
     if (operations.format) {
