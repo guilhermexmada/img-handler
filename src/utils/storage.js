@@ -1,8 +1,14 @@
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url' 
 
 async function initStorage() {
-    const uploadDir = path.resolve('uploads')
+
+    const __filepath = fileURLToPath(import.meta.url) 
+
+    const __dirpath = path.dirname(__filepath)
+    
+    const uploadDir = path.resolve(__dirpath, '..', '..', 'storage', 'uploads') 
     try {
         if (!fs.existsSync(uploadDir)) {
             await fs.promises.mkdir(uploadDir,
