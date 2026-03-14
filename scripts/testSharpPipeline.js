@@ -18,8 +18,10 @@ async function runTest() {
 
     // define operações da pipeline
     const operations = {
-        resize: { width: 50, heigth: 50},
-        rotate: 90,
+        //resize: { width: 100, heigth: 100},
+        //rotate: 90,
+        //crop: { width: 25, height: 25, top: 0, left: 0},
+        compress: { quality: 1},
         format: 'png'
     }
 
