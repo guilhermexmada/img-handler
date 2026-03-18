@@ -9,13 +9,13 @@ async function initStorage() {
     const __dirpath = path.dirname(__filepath)
     
     const uploadDir = path.resolve(__dirpath, '..', '..', 'storage', 'uploads')
-    const processedDir = path.resolve(__dirpath, '..', '..', 'storage', 'processed') // caminho para pasta de imagens processadas
+    const processedDir = path.resolve(__dirpath, '..', '..', 'storage', 'processed')
 
     try {
         if (!fs.existsSync(uploadDir)) {
             await fs.promises.mkdir(uploadDir,{recursive: true})
         }
-        if (!fs.existsSync(processedDir)){ // cria storage/processed se não existir
+        if (!fs.existsSync(processedDir)){
             await fs.promises.mkdir(processedDir,{recursive: true})
         }
         console.log('Pasta storage criada.')
