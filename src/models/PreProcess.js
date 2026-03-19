@@ -9,8 +9,13 @@ const PreProcess = sequelize.define("PreProcess", {
     defaultValue: DataTypes.UUIDV4
   },
   
-  uploadId: { 
+  original_image_id: { 
     type: DataTypes.UUID,
+    allowNull: false
+  },
+
+  file_name: {
+    type: DataTypes.STRING,
     allowNull: false
   },
 
@@ -20,8 +25,40 @@ const PreProcess = sequelize.define("PreProcess", {
     unique: true
   },
 
+  format: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  width: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+
+  height: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+
+  size: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
   operations:{ 
-    type: DataTypes.JSON
+    type: DataTypes.JSON,
+    allowNull: false,
+  },
+
+  operations_hash:{ 
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  
+  mode: {
+    type: DataTypes.ENUM('display','ml'),
+    defaultValue: 'display'
   }
 
 }, {
