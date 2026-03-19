@@ -8,17 +8,19 @@ async function initStorage() {
 
     const __dirpath = path.dirname(__filepath)
     
-    const uploadDir = path.resolve(__dirpath, '..', '..', 'storage', 'uploads') 
+    const uploadDir = path.resolve(__dirpath, '..', '..', 'storage', 'uploads')
+    const processedDir = path.resolve(__dirpath, '..', '..', 'storage', 'processed')
+
     try {
         if (!fs.existsSync(uploadDir)) {
-            await fs.promises.mkdir(uploadDir,
-                { recursive: true }
-            )
-
-            console.log('Pasta uploads criada.')
+            await fs.promises.mkdir(uploadDir,{recursive: true})
         }
+        if (!fs.existsSync(processedDir)){
+            await fs.promises.mkdir(processedDir,{recursive: true})
+        }
+        console.log('Pasta storage criada.')
     } catch (error) {
-        console.error('Erro ao criar pasta uploads: ', error)
+        console.error('Erro ao criar pasta storage: ', error)
         throw error
     }
 }
