@@ -29,6 +29,16 @@ function sortObject(obj){
     return newObj
 }
 
-export { sortObject }
+// gera hash das operações aplicadas nas imagens
+function genOperationsHash(operations){
+    // ordena JSON das operações
+    const sorted = sortObject(operations)
+    // transforma todo o JSON em string
+    const stringfied = JSON.stringify(sorted)
+    // gera hash
+    return crypto.createHash('sha256').update(stringfied).digest('hex')
+}
+
+export { sortObject, genOperationsHash }
 
 
