@@ -1,5 +1,6 @@
 import crypto from 'crypto' // nativo do node
 import fs from 'fs'
+import Stream from 'stream'
 
 /*
     hash -> função que transforma dados em sequência de caracteres de comprimento fixo de modo determinístico e irreversível
@@ -50,13 +51,13 @@ async function genImageHash(filePath){
        const hash = crypto.createHash('sha256')
        const stream = fs.createReadStream(filePath) // cria readable stream (fluxo de leitura) do arquivo, divide-o em pequenos pedaços (chunks)
        // pipeline alimenta a função de hash com as chunks progressivamente
-       await pipeline(stream, hash)
+       await Stream.promises.pipeline(stream, hash)
        return hash.digest('hex') // depois de finalizado o hash, converte para hexadecimal
     } catch (error) {
         console.log(error)
     }
 }
 
-export { sortObject, genOperationsHash }
+export { sortObject, genOperationsHash, genImageHash }
 
 
