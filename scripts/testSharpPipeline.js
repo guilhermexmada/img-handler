@@ -1,4 +1,4 @@
-import { sharPipeline } from "../src/pipelines/sharpPipeline.js"
+import { sharpPipeline } from "../src/pipelines/sharpPipeline.js"
 import path from 'path'
 import fs from 'fs'
 
@@ -21,7 +21,7 @@ async function runTest() {
     }
     
     try {
-        const result = await sharPipeline(inputPath, outputPath, operations)
+        const result = await sharpPipeline(inputPath, outputPath, operations)
 
         console.log('Pipeline executada com sucesso! \nOutput: ', result)
     } catch (error) {

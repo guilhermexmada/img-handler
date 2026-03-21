@@ -1,6 +1,6 @@
 import sharp from 'sharp'
 
-export async function sharPipeline(inputPath, outputPath, operations = {}) {
+export async function sharpPipeline(inputPath, outputPath, operations = {}) {
     let pipeline = sharp(inputPath)
     let format
 
