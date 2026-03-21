@@ -1,4 +1,5 @@
 import { sharpPipeline } from "../src/pipelines/sharpPipeline.js"
+import { getUniquePath } from "../src/utils/storage.js"
 import path from 'path'
 import fs from 'fs'
 
@@ -27,26 +28,6 @@ async function runTest() {
     } catch (error) {
         console.error('Erro em sharPipeline: ', error)
     }
-}
-
-async function getUniquePath(outputPath){
-    const parsedPath = path.parse(outputPath)
-    let dir = parsedPath.dir
-    let name = parsedPath.name
-    let ext = parsedPath.ext
-    let i = 1
-    let finalPath = outputPath
-
-    while (true){
-        try {
-            await fs.promises.access(finalPath)
-            finalPath = path.join(`${dir}/${name}(${i})${ext}`)
-            i++
-        } catch (error) {
-            break
-        }
-    }
-    return finalPath
 }
 
 runTest()
