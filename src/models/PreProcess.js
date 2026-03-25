@@ -41,7 +41,7 @@ const PreProcess = sequelize.define("PreProcess", {
   },
 
   size: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
 
