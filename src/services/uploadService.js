@@ -50,7 +50,7 @@ class UploadService {
             const saved_image = await Upload.findByPk(id)
 
             if(!saved_image){ 
-                throw new Error('Imagem não encontrada.')
+                throw new AppError('Imagem não encontrada', 404) // consulta não retornou nada
             }
 
             const verify = async () => { 
@@ -63,11 +63,7 @@ class UploadService {
 
             const result = await verify() 
 
-            return {
-                sucess: true,
-                message: 'Imagem encontrada com sucesso',
-                result
-            }
+            return result
 
         } catch (error) {
             console.log(error)
