@@ -1,9 +1,16 @@
 import HealthService from '../services/healthService.js'
+import AppError from '../utils/appError.js'
 
 const healthCheck = async (req, res, next) => {
     try {
         const data = await HealthService.healthData()
-        res.status(200).json({ message: "OK", data: data })
+
+        // se a service não retornar dados
+        if(!data){
+            throw new AppError('Serviço indisponível', 503)
+        }   
+
+        res.status(200).json({ message: "Serviço disponível", data: data })
     } catch (error) {
         next(error)
     }

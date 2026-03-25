@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url'
 
 class ProcessService{
     async sendToPipeline(fileName, filePath, operations){
-        // console.log('chegou na service')
         try {
             // cria caminho absoluto da imagem baixada
             const inputPath = path.resolve(filePath)

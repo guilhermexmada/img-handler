@@ -1,6 +1,7 @@
 import multer from 'multer' 
 import path from 'path' 
 import { v4 as uuidv4 } from 'uuid' 
+import AppError from '../utils/appError.js'
 
 const storage = multer.diskStorage({ 
     
@@ -27,7 +28,7 @@ const fileFilter = (req, file, cb) => {
     if(allowedMimeTypes.includes(file.mimetype)){ 
         cb(null, true)
     } else {
-        cb(new Error('Tipo de arquivo não permitido'), false)
+        cb(new AppError('Tipo de arquivo não permitido', 400), false) // formato inválido da imagem
     }
 }
 
