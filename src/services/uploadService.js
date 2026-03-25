@@ -1,5 +1,6 @@
 import { Upload } from '../models/index.js'
 import { fileExists } from '../utils/storage.js'
+import AppError from '../utils/appError.js'
 import path from 'path'
 
 class UploadService {
@@ -7,15 +8,14 @@ class UploadService {
     async processUpload(data) {
 
         if (!data) {
-            throw new Error('Arquivo não enviado')
+            throw new AppError('Erro ao baixar imagem', 500) // imagem não passou do uploadMiddleware
         }
 
-        const new_image = await Upload.create(data)
-
-        return {
-            success: true,
-            message: 'Upload realizado com sucesso',
-            new_image
+        try {
+            const new_image = await Upload.create(data)
+            return new_image
+        } catch (error) {
+            throw new AppError('Erro ao salvar imagem', 500) // erro ao gravar no banco
         }
     }
 
