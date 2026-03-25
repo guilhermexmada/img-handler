@@ -26,7 +26,7 @@ class UploadController{
                 extension: extension
             })
 
-            res.status(201).json({sucess: true, message: 'Imagem salva com sucesso', result})
+            res.status(201).json({success: true, message: 'Imagem salva com sucesso', result})
         } catch (error){
             next(error)
         }
@@ -34,7 +34,7 @@ class UploadController{
     async getAllImages(req, res, next){
         try {
             const result = await uploadService.getAll()
-            res.status(200).json(result)
+            res.status(200).json({success: true, message: 'Imagens encontradas com sucesso', result})
         } catch (error) {
             next(error)
         }

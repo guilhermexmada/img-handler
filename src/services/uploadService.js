@@ -38,11 +38,7 @@ class UploadService {
                 })
             )
 
-            return {
-                success: true,
-                message: 'Imagens encontradas com sucesso',
-                result
-            }
+            return result
 
         } catch (error) {
             console.log(error)
