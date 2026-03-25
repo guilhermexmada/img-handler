@@ -1,7 +1,9 @@
+import { PreProcess } from '../models/index.js'
 import { sharpPipeline } from "../pipelines/sharpPipeline.js"
 import { getUniquePath } from "../utils/storage.js"
 import path from 'path'
 import { fileURLToPath } from 'url' 
+import AppError from '../utils/appError.js'
 
 class ProcessService{
     async sendToPipeline(fileName, filePath, operations){
@@ -22,6 +24,18 @@ class ProcessService{
             return result
         } catch (error) {
             console.log(error)
+        }
+    }
+    async saveProcessedImage(data){
+        if(!data){
+            throw new AppError('Erro ao baixar imagem processada', 500)
+        }
+        try {
+            const newImage = await PreProcess.create(data)
+            return newImage
+        } catch (error) {
+            console.log(error)
+            throw new AppError('Erro ao salvar imagem processada', 500)
         }
     }
 }
