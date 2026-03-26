@@ -2,6 +2,7 @@ import { validateImage } from '../services/fileValidationService.js'
 import uploadService from '../services/uploadService.js'
 import path from 'path'
 import validator from 'validator'
+import { genImageHash } from '../utils/hash.js'
 import AppError from '../utils/appError.js'
 
 class UploadController{
@@ -18,12 +19,17 @@ class UploadController{
             const file_path = file.path
             await validateImage(file_path)
 
+            // gera hash da imagem
+            const resolvedPath = path.resolve('./', file_path)
+            const imageHash = await genImageHash(resolvedPath)
+
             const result = await uploadService.processUpload({
                 file_path : file_path,
                 mime_type : file.mimetype,
                 size: file.size,
                 original_name : file.originalname,
-                extension: extension
+                extension: extension,
+                image_hash: imageHash
             })
 
             res.status(201).json({success: true, message: 'Imagem salva com sucesso', result})
