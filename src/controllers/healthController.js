@@ -5,7 +5,6 @@ const healthCheck = async (req, res, next) => {
     try {
         const data = await HealthService.healthData()
 
-        // se a service não retornar dados
         if(!data){
             throw new AppError('Serviço indisponível', 503)
         }   

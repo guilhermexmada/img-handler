@@ -14,7 +14,7 @@ export async function validateImage(filePath){
     
     if (!type || !allowedTypes.includes(type.mime)){
         await fs.unlink(filePath)
-        throw new AppError('Arquivo inválido ou tipo não permitido', 400) // tipo mime da imagem inválido
+        throw new AppError('Arquivo inválido ou tipo não permitido', 400) 
     }
 
     return type

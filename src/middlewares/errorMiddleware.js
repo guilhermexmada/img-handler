@@ -8,7 +8,6 @@ function errorMiddleware(err, req, res, next) {
         })
     }
 
-    // erros operacionais (esperados)
     if (err.isOperational){
         return res.status(err.statusCode).json({
             sucess: false,
@@ -16,7 +15,6 @@ function errorMiddleware(err, req, res, next) {
         })
     }
 
-    // erros inesperados
     res.status(err.status || 500).json({
         success: false,
         error: "Erro interno do servidor"

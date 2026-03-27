@@ -11,7 +11,7 @@ class UploadController{
             const file = req.file
 
             if(!file){
-                throw new AppError('Arquivo não enviado', 404) // imagem não chegou no controller
+                throw new AppError('Arquivo não enviado', 404) 
             }
 
             const extension = path.extname(file.originalname).slice(1)
@@ -19,7 +19,6 @@ class UploadController{
             const file_path = file.path
             await validateImage(file_path)
 
-            // gera hash da imagem
             const resolvedPath = path.resolve('./', file_path)
             const imageHash = await genImageHash(resolvedPath)
 
@@ -50,14 +49,14 @@ class UploadController{
             const id = req.params.id
 
             if(!id){
-                throw new AppError('ID da imagem não encontrada', 400) // ID não foi passado para controller
+                throw new AppError('ID da imagem não encontrada', 400) 
             }
 
             if(validator.isUUID(id)){
                 const result = await uploadService.getOne(id)
                 res.status(200).json({success: true, message: 'Imagem encontrada com sucesso', result})
             } else{
-                throw new AppError('ID da imagem inválida', 400) // não está no formato UUID
+                throw new AppError('ID da imagem inválida', 400) 
             }
 
         } catch (error) {

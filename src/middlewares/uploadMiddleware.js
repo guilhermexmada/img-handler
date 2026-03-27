@@ -28,7 +28,7 @@ const fileFilter = (req, file, cb) => {
     if(allowedMimeTypes.includes(file.mimetype)){ 
         cb(null, true)
     } else {
-        cb(new AppError('Tipo de arquivo não permitido', 400), false) // formato inválido da imagem
+        cb(new AppError('Tipo de arquivo não permitido', 400), false)
     }
 }
 

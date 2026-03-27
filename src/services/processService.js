@@ -8,19 +8,14 @@ import AppError from '../utils/appError.js'
 class ProcessService{
     async sendToPipeline(fileName, filePath, operations){
         try {
-            // cria caminho absoluto da imagem original
             const inputPath = path.resolve(filePath)
 
-            // cria caminho de saída para guardar imagem processada
             const thisFile = fileURLToPath(import.meta.url) 
             const __dirpath = path.dirname(thisFile)
             const firstOutputPath = path.resolve(__dirpath, '..', '..', 'storage', 'processed', `${fileName}-output.png`)
             const outputPath = await getUniquePath(firstOutputPath)
 
-            // executa pipeline
             const result = await sharpPipeline(inputPath, outputPath, operations)
-
-            // retorna caminho da imagem processada
             return result
         } catch (error) {
             console.log(error)
@@ -39,9 +34,7 @@ class ProcessService{
         }
     }
     async getDuplicate(imageHash, operationsHash){
-        // procura uma imagem processada da mesma origem e com as mesmas operações
         try {
-            // INNER JOIN em sequelize
             const duplicate = await PreProcess.findOne({
                 where:{
                     operations_hash: operationsHash
@@ -60,7 +53,7 @@ class ProcessService{
             } else {
                 return {
                     result: true,
-                    duplicateImage: duplicate // se achar uma imagem processada igual, retorna ela
+                    duplicateImage: duplicate
                 }
             }
         } catch (error) {

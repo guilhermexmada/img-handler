@@ -8,14 +8,14 @@ class UploadService {
     async processUpload(data) {
 
         if (!data) {
-            throw new AppError('Erro ao baixar imagem', 500) // imagem não passou do uploadMiddleware
+            throw new AppError('Erro ao baixar imagem', 500) 
         }
 
         try {
             const new_image = await Upload.create(data)
             return new_image
         } catch (error) {
-            throw new AppError('Erro ao salvar imagem', 500) // erro ao gravar no banco
+            throw new AppError('Erro ao salvar imagem', 500) 
         }
     }
 
@@ -50,7 +50,7 @@ class UploadService {
             const saved_image = await Upload.findByPk(id)
 
             if(!saved_image){ 
-                throw new AppError('Imagem não encontrada', 404) // consulta não retornou nada
+                throw new AppError('Imagem não encontrada', 404) 
             }
 
             const verify = async () => { 
