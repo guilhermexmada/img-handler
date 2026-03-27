@@ -34,4 +34,24 @@ async function fileExists(path) {
     }
 }
 
-export { initStorage, fileExists }
+async function getUniquePath(outputPath){
+    const parsedPath = path.parse(outputPath)
+    let dir = parsedPath.dir
+    let name = parsedPath.name
+    let ext = parsedPath.ext
+    let i = 1
+    let finalPath = outputPath
+
+    while (true){
+        try {
+            await fs.promises.access(finalPath)
+            finalPath = path.join(`${dir}/${name}(${i})${ext}`)
+            i++
+        } catch (error) {
+            break
+        }
+    }
+    return finalPath
+}
+
+export { initStorage, fileExists, getUniquePath }

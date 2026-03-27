@@ -8,9 +8,16 @@ function errorMiddleware(err, req, res, next) {
         })
     }
 
+    if (err.isOperational){
+        return res.status(err.statusCode).json({
+            sucess: false,
+            error: err.message
+        })
+    }
+
     res.status(err.status || 500).json({
         success: false,
-        error: err.message || "Erro interno do servidor"
+        error: "Erro interno do servidor"
     })
 }
 

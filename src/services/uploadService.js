@@ -1,5 +1,6 @@
 import { Upload } from '../models/index.js'
 import { fileExists } from '../utils/storage.js'
+import AppError from '../utils/appError.js'
 import path from 'path'
 
 class UploadService {
@@ -7,15 +8,14 @@ class UploadService {
     async processUpload(data) {
 
         if (!data) {
-            throw new Error('Arquivo não enviado')
+            throw new AppError('Erro ao baixar imagem', 500) 
         }
 
-        const new_image = await Upload.create(data)
-
-        return {
-            success: true,
-            message: 'Upload realizado com sucesso',
-            new_image
+        try {
+            const new_image = await Upload.create(data)
+            return new_image
+        } catch (error) {
+            throw new AppError('Erro ao salvar imagem', 500) 
         }
     }
 
@@ -38,11 +38,7 @@ class UploadService {
                 })
             )
 
-            return {
-                success: true,
-                message: 'Imagens encontradas com sucesso',
-                result
-            }
+            return result
 
         } catch (error) {
             console.log(error)
@@ -54,7 +50,7 @@ class UploadService {
             const saved_image = await Upload.findByPk(id)
 
             if(!saved_image){ 
-                throw new Error('Imagem não encontrada.')
+                throw new AppError('Imagem não encontrada', 404) 
             }
 
             const verify = async () => { 
@@ -67,11 +63,7 @@ class UploadService {
 
             const result = await verify() 
 
-            return {
-                sucess: true,
-                message: 'Imagem encontrada com sucesso',
-                result
-            }
+            return result
 
         } catch (error) {
             console.log(error)

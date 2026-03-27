@@ -1,6 +1,7 @@
 import express from 'express'
 import healthRoutes from './src/routes/healthRoutes.js'
 import uploadRoutes from './src/routes/uploadRoutes.js'
+import processRoutes from './src/routes/processRoutes.js'
 import errorMiddleware from './src/middlewares/errorMiddleware.js'
 import dotenv from 'dotenv'
 
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 
 app.use('/', healthRoutes)
 app.use('/upload', uploadRoutes)
+app.use('/process', processRoutes)
 app.use(errorMiddleware)
 
 export default app
