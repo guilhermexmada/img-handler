@@ -15,7 +15,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(process.cwd(), "src/views")) // configura pasta views
 app.use(expressLayouts); // configura utilização de layouts
 app.set("layout", "layouts/main"); // define o layout padrão das páginas
-app.use(express.static('public'))
+app.use(express.static(path.join(process.cwd(), 'src/public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
