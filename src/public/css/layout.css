@@ -90,12 +90,77 @@ input, select, button {
   border-radius: 15%;
   aspect-ratio: 1 / 1; /* 🔥 deixa sempre quadrado */
   overflow: hidden;
+  position: relative;
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* 🔥 corta e preenche corretamente */
+  border-radius: 15%;
+  transition: ease-in-out;
+  transition-duration: 200ms;
+  filter: grayscale(0.6);
+}
+
+.card img:hover{
+  transform: scale(1.1);
+  filter: grayscale(0);
+}
+
+.card-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  gap: 6px;
+
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+/* aparece no hover */
+.card:hover .card-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* botão base */
+.btn {
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+
+  border-radius: 25%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.2s;
+}
+
+/* hover */
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* cores específicas */
+.btn.delete:hover {
+  background: #ff6467;
+}
+
+.btn.process:hover {
+  background: #a684ff;
+}
+
+.btn.data:hover {
+  background: #00bc7d;
 }
 
 /* Responsividade */
@@ -120,6 +185,8 @@ input, select, button {
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 75%;
+  transition: ease-in-out;
+  transition-duration: 200ms;
 }
 
 .upload-card:hover{
