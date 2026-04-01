@@ -1,6 +1,8 @@
+<!--
 <section class="control">
   <div class="control-inner">
 
+    
     <div class="control-group">
       <label>Buscar</label>
       <input type="text" placeholder="Digite algo..." />
@@ -19,13 +21,26 @@
 
   </div>
 </section>
+-->
 
 <section class="gallery">
   <div class="gallery-grid">
 
+    <!-- BOTÃO DE UPLOAD -->
+    <div class="card upload-card">
+      <label for="image">
+      </label>
+      <input id="image" type="file" hidden />
+    </div>
+
     <!-- Exemplo de item -->
-    <div class="card">
-      <img src="/img/teste.jpg" alt="">
+    <div class="card image-card">
+      <img src="/img/test.png" alt="">
+      <div class="card-actions">
+        <button class="btn delete">🗑</button>
+        <button class="btn process">⚙</button>
+        <button class="btn data">⊞</button>
+      </div>
     </div>
 
   </div>
