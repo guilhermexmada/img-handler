@@ -1,3 +1,5 @@
+import { showNotification } from "./notifications.js";
+
 const imageInput = document.getElementById('image')
 
 // JSDOC (abaixo) deixa mensagem ao passar mouse por cima de função
@@ -22,9 +24,10 @@ const uploadImage = async (file) => {
 
         // verifica se a resposta está entre 200-299
         if(response.ok){
-            alert('Imagem salva com sucesso!')
+            showNotification(data.message, 'success')
             console.log(`Status: ${response.status} \n${data.message}\n${JSON.stringify(data.result)}`)
         } else{
+            showNotification('Erro ao salvar imagem', 'error')
             console.log(data.message || 'Erro ao fazer upload')
         }
     } catch (error) {
