@@ -3,6 +3,6 @@ import viewController from "../controllers/viewController.js"
 
 const router = express.Router()
 
-router.get('/', viewController.renderHome) // rota para homepage
+router.get('/', viewController.renderHome)
 
 export default router

@@ -1,5 +1,5 @@
 import express from 'express'
-import expressLayouts from 'express-ejs-layouts' // middleware que permite criar layouts compartilhados em EJS através da variável <%- body %>
+import expressLayouts from 'express-ejs-layouts' 
 import viewRoutes from './src/routes/viewRoutes.js'
 import healthRoutes from './src/routes/healthRoutes.js'
 import uploadRoutes from './src/routes/uploadRoutes.js'
@@ -12,16 +12,12 @@ dotenv.config()
 
 const app = express()
 app.set('view engine', 'ejs')
-app.set('views', path.join(process.cwd(), "src/views")) // configura pasta views
-app.use(expressLayouts); // configura utilização de layouts
-app.set("layout", "layouts/main"); // define o layout padrão das páginas
+app.set('views', path.join(process.cwd(), "src/views")) 
+app.use(expressLayouts); 
+app.set("layout", "layouts/main"); 
 app.use(express.static(path.join(process.cwd(), 'src/public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
-// app.get('/', (req, res) => {
-//     res.send('Hello, world!')
-// })
 
 app.use('/', viewRoutes)
 app.use('/', healthRoutes)
