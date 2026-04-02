@@ -16,6 +16,7 @@ app.set('views', path.join(process.cwd(), "src/views"))
 app.use(expressLayouts); 
 app.set("layout", "layouts/main"); 
 app.use(express.static(path.join(process.cwd(), 'src/public')))
+app.use('/storage', express.static(path.join(process.cwd(), 'storage')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 

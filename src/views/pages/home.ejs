@@ -42,5 +42,16 @@
       </div>
     </div>
 
+    <% images.forEach(image => {  %>
+      <div class="card image-card">
+      <img src="<%= image %>" alt="">
+      <div class="card-actions">
+        <button class="btn delete">🗑</button>
+        <button class="btn process">⚙</button>
+        <button class="btn data">⊞</button>
+      </div>
+    </div>
+      <% }) %>
+
   </div>
 </section>

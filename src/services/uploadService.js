@@ -22,7 +22,8 @@ class UploadService {
     async getAll() {
         try {
             const saved_images = await Upload.findAll({
-                order: [['createdAt', 'DESC']]
+                order: [['createdAt', 'DESC']],
+                raw: true // consulta apenas os dados do registro, ignora outros métodos da instância sequelize
             })
 
             const result = await Promise.all(
