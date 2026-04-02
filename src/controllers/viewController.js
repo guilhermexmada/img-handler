@@ -5,17 +5,19 @@ class viewController{
         // faz requisição para buscar todas as imagens
         const images = await uploadService.getAll()
 
-        let imgPaths = []
-
-        images.forEach(image => {
-            let filePath = image.image.file_path // captura caminho original do banco
-            let webPath = filePath.replace(/\\/g, '/'); // ajusta padrão de barras
-            imgPaths.push(webPath) // adiciona a um array
+        // usa .map para escrever um novo objeto para cada item do objeto retornado na consulta
+        const formattedImages = images.map(item => {
+            const filePath = item.image.file_path 
+            const webPath = filePath.replace(/\\/g, '/') // formata caminho corretamente (troca \ por /)
+            return {
+                id: item.image.id,
+                path: webPath
+            }
         })
 
         res.render('pages/home',{
             title: 'Home', 
-            images: imgPaths // envia array com caminhos das imagens para homepage
+            images: formattedImages
         })
     }
 }   
