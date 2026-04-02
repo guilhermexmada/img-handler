@@ -18,6 +18,7 @@ const uploadImage = async (file) => {
         const data = await response.json() 
 
         if(response.ok){
+            // window.location.reload()
             showNotification(data.message, 'success')
             console.log(`Status: ${response.status} \n${data.message}\n${JSON.stringify(data.result)}`)
         } else{
