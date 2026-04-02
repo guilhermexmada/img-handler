@@ -32,7 +32,11 @@ const Image = sequelize.define('Image', {
     },
     extension:{
         type: DataTypes.STRING
-    }
+    },
+    image_hash:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 },
     {
         tableName: 'images',
