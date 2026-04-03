@@ -46,10 +46,7 @@
       <div class="card image-card" id="<%= img.id %>">
       <img src="<%= img.path %>" alt="">
       <div class="card-actions">
-        <form action="upload/<%= img.id %>" method="post" onsubmit="return confirm('Deseja excluir essa imagem?')">
-        <button type="submit" class="btn delete">🗑</button>
-        </form>
-        <button class="btn delete" onclick="deleteImage('<%= img.id %>')">🗑2</button>
+        <button class="btn delete" onclick="confirm('Tem certeza que deseja excluir essa imagem?') && deleteImage('<%= img.id %>')">🗑</button>
         <button class="btn process">⚙</button>
         <button class="btn data">⊞</button>
       </div>
