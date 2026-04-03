@@ -83,7 +83,7 @@ class UploadService {
 
             // se arquivo existir na storage, apaga
             if(exists){
-                await deleteFile(path)
+                await deleteFile(imageToDelete.file_path)
             }
 
             // deleta registro no banco de dados
