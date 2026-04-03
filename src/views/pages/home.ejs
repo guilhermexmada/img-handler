@@ -49,6 +49,7 @@
         <form action="upload/<%= img.id %>" method="post" onsubmit="return confirm('Deseja excluir essa imagem?')">
         <button type="submit" class="btn delete">🗑</button>
         </form>
+        <button class="btn delete" onclick="deleteImage('<%= img.id %>')">🗑2</button>
         <button class="btn process">⚙</button>
         <button class="btn data">⊞</button>
       </div>
