@@ -42,11 +42,11 @@
       </div>
     </div>
 
-    <% images.forEach(image => {  %>
-      <div class="card image-card">
-      <img src="<%= image %>" alt="">
+    <% images.forEach(img => {  %>
+      <div class="card image-card" id="<%= img.id %>">
+      <img src="<%= img.path %>" alt="">
       <div class="card-actions">
-        <button class="btn delete">🗑</button>
+        <button class="btn delete" onclick="confirm('Tem certeza que deseja excluir essa imagem?') && deleteImage('<%= img.id %>')">🗑</button>
         <button class="btn process">⚙</button>
         <button class="btn data">⊞</button>
       </div>

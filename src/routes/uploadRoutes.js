@@ -11,4 +11,6 @@ router.get('/', uploadController.getAllImages)
 
 router.get('/:id', uploadController.getOneImage) 
 
+router.post('/:id', uploadController.deleteOneImage)
+
 export default router

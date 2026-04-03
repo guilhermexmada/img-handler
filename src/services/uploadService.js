@@ -1,5 +1,5 @@
 import { Upload } from '../models/index.js'
-import { fileExists } from '../utils/storage.js'
+import { fileExists, deleteFile } from '../utils/storage.js' // importando utilitário para apagar arquivo da storage
 import AppError from '../utils/appError.js'
 import path from 'path'
 
@@ -65,6 +65,31 @@ class UploadService {
             const result = await verify() 
 
             return result
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteOne(id){
+        try {
+            const imageToDelete = await Upload.findByPk(id)
+
+            if(!imageToDelete){
+                throw new AppError('Imagem não encontrada', 404)
+            }
+
+            const exists = await fileExists(imageToDelete.file_path)
+
+            // se arquivo existir na storage, apaga
+            if(exists){
+                await deleteFile(path)
+            }
+
+            // deleta registro no banco de dados
+            await Upload.destroy({
+                where: { id: id}
+            })
 
         } catch (error) {
             console.log(error)
