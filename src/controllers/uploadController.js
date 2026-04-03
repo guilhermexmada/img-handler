@@ -72,8 +72,8 @@ class UploadController {
             }
             if (validator.isUUID(id)) {
                 await uploadService.deleteOne(id)
-                // res.status(200).json({ success: true, message: 'Imagem deletada com sucesso'})
-                res.redirect('/') // joga usuário p/ rota raiz da aplicação -> viewController.renderHome()
+                res.status(200).json({ success: true, message: 'Imagem deletada com sucesso'})
+                // res.redirect('/') // joga usuário p/ rota raiz da aplicação -> viewController.renderHome()
             } else {
                 throw new AppError('ID da imagem inválida', 400)
             }
