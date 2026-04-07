@@ -1,16 +1,16 @@
 import { PreProcess, Upload } from '../models/index.js'
 import { sharpPipeline } from "../pipelines/sharpPipeline.js"
-import { getUniquePath } from "../utils/storage.js"
+import { fileExists, getUniquePath } from "../utils/storage.js"
 import path from 'path'
-import { fileURLToPath } from 'url' 
+import { fileURLToPath } from 'url'
 import AppError from '../utils/appError.js'
 
-class ProcessService{
-    async sendToPipeline(fileName, filePath, operations){
+class ProcessService {
+    async sendToPipeline(fileName, filePath, operations) {
         try {
             const inputPath = path.resolve(filePath)
 
-            const thisFile = fileURLToPath(import.meta.url) 
+            const thisFile = fileURLToPath(import.meta.url)
             const __dirpath = path.dirname(thisFile)
             const firstOutputPath = path.resolve(__dirpath, '..', '..', 'storage', 'processed', `${fileName}-output.png`)
             const outputPath = await getUniquePath(firstOutputPath)
@@ -21,8 +21,8 @@ class ProcessService{
             console.log(error)
         }
     }
-    async saveProcessedImage(data){
-        if(!data){
+    async saveProcessedImage(data) {
+        if (!data) {
             throw new AppError('Erro ao baixar imagem processada', 500)
         }
         try {
@@ -33,23 +33,23 @@ class ProcessService{
             throw new AppError('Erro ao salvar imagem processada', 500)
         }
     }
-    async getDuplicate(imageHash, operationsHash){
+    async getDuplicate(imageHash, operationsHash) {
         try {
             const duplicate = await PreProcess.findOne({
-                where:{
+                where: {
                     operations_hash: operationsHash
                 },
-                include:{
+                include: {
                     model: Upload,
                     as: 'upload',
-                    where:{
+                    where: {
                         image_hash: imageHash
                     },
                     required: true
                 }
             })
-            if(duplicate === null){
-                return {result: false}
+            if (duplicate === null) {
+                return { result: false }
             } else {
                 return {
                     result: true,
@@ -58,6 +58,30 @@ class ProcessService{
             }
         } catch (error) {
             throw new AppError('Não foi possível verificar a duplicidade da operação', 500)
+        }
+    }
+    async getProcessedVersions(id) {
+        try {
+            const processedImages = await PreProcess.findAll({
+                where: {
+                    original_image_id: id,
+                },
+                order: [['createdAt', 'DESC']],
+                raw: true
+            })
+
+            const result = await Promise.all(
+                processedImages.map(async (image) => {
+                    const exists = await fileExists(image.file_path)
+                    return {
+                        image,
+                        exists_in_storage: exists
+                    }
+                })
+            )
+            return result
+        } catch (error) {
+            console.log(error)
         }
     }
 }
