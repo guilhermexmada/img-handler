@@ -95,26 +95,63 @@ footer{
   flex-direction: column;
   gap: 15px;
 }
-
-/* CONTROL (barra superior) */
 .control {
   border: 2px solid #000;
   background: #fff;
-  padding: 10px;
+  padding: 15px;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: center;
 }
 
-.control-inner {
+/* PREVIEW */
+.control-preview {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  align-items: flex-end;
+
+  max-height: 300px;
+  overflow: hidden;
 }
 
-.control-group {
+.control-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* 🔥 mantém proporção real */
+}
+
+/* INFO */
+.control-info {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  align-items: center;
+}
+
+.control-info ul {
+  list-style: none;
+  width: 100%;
+}
+
+.control-info li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .control {
+    grid-template-columns: 1fr;
+  }
+
+  .control-preview {
+    max-height: 200px;
+  }
+
+  .control-info {
+    justify-content: flex-start;
+  }
 }
 
 /* Inputs */
@@ -223,17 +260,6 @@ input, select, button {
   background: #00bc7d;
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
-  .control-inner {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .control-group {
-    width: 100%;
-  }
-}
 
 .upload-card{
   border: 0px solid #18181b;
