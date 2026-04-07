@@ -5,4 +5,6 @@ const router = express.Router()
 
 router.get('/', viewController.renderHome)
 
+router.get('/:id', viewController.renderImagePage)
+
 export default router
