@@ -35,6 +35,12 @@ class ProcessController {
                 }
 
                 const result = await processService.sendToPipeline(originalName, originalPath, operations)
+                
+                // extraindo caminho curto do caminho absoluto da imagem
+                const resultParts = result.split(path.sep) // divide em partes com base no separador \ ou /
+                const indexStorage = resultParts.indexOf('storage') 
+                const shortPath = resultParts.slice(indexStorage).join(path.sep)
+                console.log(shortPath)
 
                 const stats = await fs.promises.stat(result)
                 const metadata = await sharp(result).metadata()
@@ -43,7 +49,7 @@ class ProcessController {
                 const processedImage = await processService.saveProcessedImage({
                     original_image_id : originalId,
                     file_name: processedImageName,
-                    file_path: path.resolve(result),
+                    file_path: shortPath,
                     format: metadata.format,
                     width: metadata.width,
                     height: metadata.height,
