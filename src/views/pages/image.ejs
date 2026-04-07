@@ -1,0 +1,43 @@
+
+<section class="control">
+
+  <div class="control-preview">
+    <img src="/img/test.png" alt="Preview da imagem" />
+  </div>
+
+  <div class="control-info">
+    <ul>
+      <li><strong>Nome:</strong> imagem.jpg</li>
+      <li><strong>Largura:</strong> 1920px</li>
+      <li><strong>Altura:</strong> 1080px</li>
+      <li><strong>Tamanho:</strong> 2.3MB</li>
+      <li><strong>Tipo:</strong> image/jpeg</li>
+    </ul>
+  </div>
+
+</section>
+
+<section class="gallery">
+  <div class="gallery-grid">
+
+    <div class="card image-card" id="<%= uploadedImage.id %>">
+      <img src="<%= uploadedImage.path %>" alt="imagem baixada">
+      <div class="card-actions">
+        <button class="btn delete">🗑</button>
+        <button class="btn process">⚙</button>
+        <button class="btn data">⊞</button>
+      </div>
+    </div>
+
+    <% images.forEach(img => {  %>
+      <div class="card image-card" id="<%= img.id %>">
+      <img src="<%= img.path %>" alt="imagem processada">
+      <div class="card-actions">
+        <button class="btn delete" onclick="confirm('Tem certeza que deseja excluir essa imagem?') && deleteImage('<%= img.id %>')">🗑</button>
+        <button class="btn data">⊞</button>
+      </div>
+    </div>
+      <% }) %>
+
+  </div>
+</section>
