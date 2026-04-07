@@ -53,7 +53,7 @@ const PreProcess = sequelize.define("PreProcess", {
   operations_hash:{ 
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    // unique: true
   },
   
   mode: {
